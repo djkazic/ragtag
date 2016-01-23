@@ -1,10 +1,11 @@
 package org.alopex.ragnode;
 
 import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
+import com.sun.management.OperatingSystemMXBean;
 
 import javax.management.MBeanServerConnection;
 
+@SuppressWarnings("restriction")
 public class SysRes {
 
 	public static double load() {
@@ -13,7 +14,7 @@ public class SysRes {
 			OperatingSystemMXBean osMBean 
 				= ManagementFactory.newPlatformMXBeanProxy(mbsc, ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME, 
 														   OperatingSystemMXBean.class);
-			return osMBean.getSystemLoadAverage();
+			return osMBean.getSystemCpuLoad();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
