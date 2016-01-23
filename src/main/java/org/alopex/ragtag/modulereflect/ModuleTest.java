@@ -6,16 +6,17 @@ import junit.framework.TestCase;
 
 public class ModuleTest extends TestCase {
 	
-	public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException
+	public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, NullProcessException
 	{
-		Class<?> clazz = new Process().getClass();
-		Integer[] nums = new Integer[10000];
+
+		Class<?> clazz = Process.class;
+		Integer[] nums = new Integer[10];
 		for(int i = 0; i < nums.length; i++)
 			nums[i] = i;
 		Module module = new Module();
-		module.setProcess(new Process().getClass().getMethods()[0]);
-		module.receive(nums);
-		System.out.println(module.benchmark() / 100000.0);
+		module.setProcess(Process.class.getMethods()[0]);
+		module.receiveData(nums);
+		System.out.println(module.benchmark(10) / 100000.0);
 		ArrayList<Object> output = module.execute();
 		System.out.println(output.size());
 		for(int i = 0; i < nums.length; i++)
