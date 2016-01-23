@@ -65,7 +65,9 @@ public class Worker {
 	public boolean equals(Object other) {
 		if(other instanceof Worker) {
 			Worker tempWorker = (Worker) other;
-			return id.equals(tempWorker.getID());
+			if(id != null) {
+				return id.equals(tempWorker.getID());
+			}
 		}
 		return false;
 	}
