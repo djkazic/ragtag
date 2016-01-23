@@ -11,7 +11,7 @@ public class Worker {
 	private String id;
 	private Connection connection;
 	private int benchmark;
-	private double performance;
+	private double share;
 	private double load;
 	
 	public Worker(Connection connection) {
@@ -59,8 +59,12 @@ public class Worker {
 		benchmark = iterations;
 	}
 	
-	public void setPerformance(double d) {
-		performance = d;
+	public double getShare() {
+		return share;
+	}
+	
+	public void setShare(double inShare) {
+		share = inShare;
 	}
 
 	public void setLoad(double sysLoad) {

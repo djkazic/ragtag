@@ -3,6 +3,7 @@ package org.alopex.ragtag.net.worker;
 import java.util.ArrayList;
 
 import org.alopex.ragtag.Utilities;
+import org.alopex.ragtag.module.Module;
 import org.alopex.ragtag.net.poll.SysResPoller;
 
 import com.esotericsoftware.kryonet.Connection;
@@ -53,14 +54,12 @@ public class WorkerManager {
 	
 	public static void calculatePerformance() {
 		if(workers.size() > 0) {
-			Worker max = workers.get(0);
-			for(Worker worker : workers) {			
-				if(worker.getBenchmark() > max.getBenchmark()) {
-					max = worker;
-				}
+			int total = 0;
+			for(Worker worker : workers) {
+				total += worker.getBenchmark();
 			}
 			for(Worker worker : workers) {
-				worker.setPerformance((double) worker.getBenchmark() / max.getBenchmark());
+				worker.setShare((double) worker.getBenchmark() / total);
 			}
 		}
 	}
@@ -73,7 +72,7 @@ public class WorkerManager {
 		}
 	}
 	
-	public static void assignWork() {
-		calculatePerformance();
+	public static void assignWork(Module module) {
+		//TODO
 	}
 }
