@@ -1,4 +1,4 @@
-package org.alopex.ragtag.net;
+package org.alopex.ragtag.net.worker;
 
 import org.alopex.ragtag.Utilities;
 

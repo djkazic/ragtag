@@ -1,4 +1,4 @@
-package org.alopex.ragtag.net;
+package org.alopex.ragtag.net.worker;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,7 @@ public class WorkerManager {
 	private static ArrayList<Worker> workers;
 	
 	public WorkerManager() {
+		Utilities.log("WorkerManager", "Starting WorkerManager instance...", false);
 		workers = new ArrayList<Worker> ();
 	}
 

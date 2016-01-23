@@ -10,7 +10,7 @@ public class Networking {
 
 	private Server server;
 	
-	public Networking() {
+	public void initialize() {
 		registerServerListeners();
 		startServer();
 	}
