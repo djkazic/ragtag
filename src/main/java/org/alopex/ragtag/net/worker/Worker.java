@@ -1,7 +1,7 @@
 package org.alopex.ragtag.net.worker;
 
 import org.alopex.ragtag.Utilities;
-import org.alopex.ragtag.net.packets.Request;
+import org.alopex.ragtag.net.packets.NetRequest;
 
 import com.esotericsoftware.kryonet.Connection;
 
@@ -19,7 +19,7 @@ public class Worker {
 	}
 	
 	public void handShake() {
-		connection.sendTCP(new Request(Request.HANDSHAKE, null));
+		connection.sendTCP(new NetRequest(NetRequest.HANDSHAKE, null));
 	}
 	
 	public void assignLoad() {

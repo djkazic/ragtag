@@ -1,7 +1,7 @@
 package org.alopex.ragtag.net;
 
-import org.alopex.ragtag.net.packets.Data;
-import org.alopex.ragtag.net.packets.Request;
+import org.alopex.ragtag.net.packets.NetData;
+import org.alopex.ragtag.net.packets.NetRequest;
 import org.alopex.ragtag.net.worker.Worker;
 import org.alopex.ragtag.net.worker.WorkerManager;
 
@@ -19,10 +19,10 @@ public class ServerListener extends Listener {
 	}
 	
 	public void received(Connection connection, Object object) {
-		if(object instanceof Request) {
-			Request.processRequest(connection, object);
-		} else if(object instanceof Data) {
-			Data.processData(connection, object);
+		if(object instanceof NetRequest) {
+			NetRequest.processRequest(connection, object);
+		} else if(object instanceof NetData) {
+			NetData.processData(connection, object);
 		}
 	}
 }

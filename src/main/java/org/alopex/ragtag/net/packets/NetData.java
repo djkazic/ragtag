@@ -10,9 +10,9 @@ import com.esotericsoftware.kryonet.Connection;
  * Class for when ragtag receives Data
  * @author Kevin Cai
  */
-public class Data extends Packet {
+public class NetData extends Packet {
 	
-	public Data(byte type, Object payload) {
+	public NetData(byte type, Object payload) {
 		super(type, payload);
 	}
 
@@ -22,7 +22,7 @@ public class Data extends Packet {
 	public static void processData(Connection connection, Object oData) {
 		Worker worker = WorkerManager.getWorker(connection);
 		if(worker != null) {
-			Data tempData = (Data) oData;
+			NetData tempData = (NetData) oData;
 			switch(tempData.getType()) {
 				//Set the worker ID based on handshake
 				case HANDSHAKE:

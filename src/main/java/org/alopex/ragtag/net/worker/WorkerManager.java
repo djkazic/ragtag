@@ -60,11 +60,7 @@ public class WorkerManager {
 	
 	public static void assignWork() {
 		calculatePerformance();
-		//Get module details
-		//Assign workers work based on their performance score (percentages of work)
-		//Break work into workers.size() chunks, assign X number of chunks at a time (load)
-		//Those with higher performance get multiple loads, whereas lower ones get one
-		//Load load = breakWork(module, worker)
-		//worker.assignLoad(load)
+
+
 	}
 }

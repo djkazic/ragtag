@@ -9,9 +9,9 @@ import com.esotericsoftware.kryonet.Connection;
  * Class for when ragtag receives Request
  * @author Kevin Cai
  */
-public class Request extends Packet {
+public class NetRequest extends Packet {
 
-	public Request(byte type, Object payload) {
+	public NetRequest(byte type, Object payload) {
 		super(type, payload);
 	}
 
