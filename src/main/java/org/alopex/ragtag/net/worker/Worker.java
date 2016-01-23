@@ -12,6 +12,7 @@ public class Worker {
 	private Connection connection;
 	private int benchmark;
 	private double performance;
+	private double load;
 	
 	public Worker(Connection connection) {
 		Utilities.log(this, "New inbound connection: worker", false);
@@ -62,6 +63,11 @@ public class Worker {
 		performance = d;
 	}
 
+	public void setLoad(double sysLoad) {
+		Utilities.log(this, "Worker " + id.substring(0, 5) + " load detected: " + load, false);
+		load = sysLoad;
+	}
+
 	@Override
 	public boolean equals(Object other) {
 		if(other instanceof Worker) {
@@ -76,5 +82,9 @@ public class Worker {
 	@Override
 	public int hashCode() {
 		return connection.hashCode() + id.hashCode();
+	}
+
+	public void pollSysReq() {
+		connection.sendTCP(new NetRequest(NetRequest.SYSRES, null));
 	}
 }

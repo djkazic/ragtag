@@ -3,6 +3,7 @@ package org.alopex.ragtag.net.worker;
 import java.util.ArrayList;
 
 import org.alopex.ragtag.Utilities;
+import org.alopex.ragtag.net.poll.SysResPoller;
 
 import com.esotericsoftware.kryonet.Connection;
 
@@ -13,6 +14,11 @@ public class WorkerManager {
 	public WorkerManager() {
 		Utilities.log("WorkerManager", "Starting WorkerManager instance...", false);
 		workers = new ArrayList<Worker> ();
+		
+		Utilities.log("WorkerManager", "Starting SysReqPoller instance...", false);
+		Thread sysResThread = new Thread(new SysResPoller());
+		sysResThread.setName("System Res Poller");
+		sysResThread.start();
 	}
 
 	public static void registerWorker(Worker worker) {
@@ -55,6 +61,14 @@ public class WorkerManager {
 			}
 			for(Worker worker : workers) {
 				worker.setPerformance((double) worker.getBenchmark() / max.getBenchmark());
+			}
+		}
+	}
+	
+	public static void pollWorkerSysReq() {
+		if(workers.size() > 0) {
+			for(int i=0; i < workers.size(); i++) {
+				workers.get(i).pollSysReq();
 			}
 		}
 	}
