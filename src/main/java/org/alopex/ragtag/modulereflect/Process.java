@@ -2,8 +2,8 @@ package org.alopex.ragtag.modulereflect;
 
 public abstract class Process {
 
-		public static Integer process(Integer hello)
-		{
-			return hello % 3;
-		}
+    //Sample user defined method	
+	public static Boolean process(Integer hello) {
+		return hello % 2 == 0;
+	}
 }
