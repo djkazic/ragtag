@@ -1,4 +1,4 @@
-package org.alopex.ragtag.modulereflect;
+package org.alopex.ragtag.module;
 
 public class NullProcessException extends RuntimeException {
 

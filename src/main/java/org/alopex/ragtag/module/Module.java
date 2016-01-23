@@ -1,51 +1,92 @@
 package org.alopex.ragtag.module;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public abstract class Module<T> {
-	
-	private ArrayList<Data<T>> dataList = new ArrayList<Data<T>> ();
-	private HashMap<Data<T>, Object> output = new HashMap<Data<T>, Object> ();
-	private Processor<T> processor;
-	
-	public abstract void define();
-	public abstract void read();
-	
-	public void setProcessor(Processor<T> processor) {
-		this.processor = processor;
-	}
-	
-	//Inserts an atomic piece of data
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void insertData(T o) {
-		Data data = new Data(o.getClass(), o);
-		processor.data = (T) o;
-		data.setProcess(processor);
-		dataList.add(data);
-	}
-	
-	//Iterates through dataList until it is empty, saving all outputs
-	public void execute() {
-		while(dataList.size() > 0) {
-			Data<T> data = dataList.remove(0);
-			if(data != null) {
-				output.put(data, data.process());
+import org.alopex.ragtag.Utilities;
+import org.apache.commons.lang3.ClassUtils;
+
+public class Module {
+
+	private Object[] data;
+	private Method process = null;
+
+	/* Runs the job given to the module a given number of times
+	 * 
+	 * @param timesToRun the number of times to run the test job 
+	 * @return time taken in nanoseconds. Returns -1 if benchmark could not be run
+	 */
+	public final long benchmark(int throwawayIterations) {
+		//Check to make sure the benchmark can actually run
+		if(data == null)
+			throw new NullPointerException("Data is null");
+		if(process == null)
+			throw new NullProcessException("Process not found in benchmark method of Module");
+		
+		//Optimize the loop via JVM native compilation
+		for(int i = 0; i < throwawayIterations; i++) {
+			try {
+				process.invoke(null, data[0]);
+			} catch (Exception e) {
+				return -1;
 			}
-			//Debug
-			System.out.println(output);
 		}
+		
+		long start = System.nanoTime();
+		try {
+			process.invoke(null, data[0]);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		long end = System.nanoTime();
+		
+		//Return the time taken in nanoseconds
+		return end-start;
 	}
-	
-	//Times how long one iteration of this process takes
-	public long benchmark() {
-		//Throw out 5 iterations to stabilize benchmark timing
-		for(int i=0; i < 5; i++) {
-			dataList.get(0).process();
+
+	public final ArrayList<Object> execute() {
+		ArrayList<Object> outData = new ArrayList<Object>();
+		
+		//Currently only works if there is one parameter...
+		Class<?> paramType = this.process.getParameterTypes()[0];
+		
+		//Working with primitives suck. Probably going to deprecate
+		if(ClassUtils.isPrimitiveOrWrapper(paramType)) {
+			if(paramType.isPrimitive()) {
+				paramType = ClassUtils.primitiveToWrapper(paramType);
+			}
 		}
-		long startTime = System.nanoTime();
-		dataList.get(0).process();
-		long endTime = System.nanoTime();
-		return endTime - startTime;
+		
+		//Calls process on each piece of data
+		for(Object datum : this.data) {
+			try {
+				outData.add(this.process.invoke(
+							null,
+						    paramType.cast(datum)
+						   ));
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		return outData;
+	}
+
+	//Receives data and then does data validation. Must have a process already defined
+	public boolean receiveData(Object[] data) {
+		Class<?> inType = this.process.getParameterTypes()[0];
+		if(!(inType.isInstance(data[0]))) {
+			//If the process method has an input type different from the input data
+			Utilities.log(this, "Type mismatch detected: inType = " + inType.getName() 
+							  + " vs data type = " + data.getClass(), false);
+			return false;
+		}
+		this.data = data;
+		return true;
+	}
+
+	//Just defines the process
+	public boolean setProcess(Method process) {
+		this.process = process;
+		return true;
 	}
 }
