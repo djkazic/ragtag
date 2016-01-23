@@ -19,28 +19,37 @@ public class NetData extends Packet {
 	}
 
 	public static final byte HANDSHAKE = 0x02;
-	public static final byte BENCHMARK = 0x04;
+	public static final byte SYSRES    = 0x04;
+	public static final byte BENCHMARK = 0x06;
 	
 	public static void processData(Connection connection, Object oData) {
 		Worker worker = WorkerManager.getWorker(connection);
 		if(worker != null) {
 			NetData tempData = (NetData) oData;
+			Object oPayload = tempData.getPayload();
+			
 			switch(tempData.getType()) {
 				//Set the worker ID based on handshake
 				case HANDSHAKE:
 					Utilities.log("DataCore", "Received handshake data", false);
-					Object hPayload = tempData.getPayload();
-					if(hPayload instanceof String) {
+					if(oPayload instanceof String) {
 						String handshakeID = (String) tempData.getPayload();
 						worker.setID(handshakeID);
+					}
+					break;
+					
+				case SYSRES:
+					Utilities.log("DataCore", "Received system resource report from " + worker.getID().substring(0, 5), false);
+					if(oPayload instanceof Double) {
+						double sysLoad = ((Double) oPayload).doubleValue();
+						worker.setLoad(sysLoad);
 					}
 					break;
 				
 				case BENCHMARK:
 					Utilities.log("DataCore", "Received benchmark data", false);
-					Object benchPayload = tempData.getPayload();
-					if(benchPayload instanceof Integer) {
-						int iterations = ((Integer) benchPayload).intValue();
+					if(oPayload instanceof Integer) {
+						int iterations = ((Integer) oPayload).intValue();
 						worker.setBenchmark(iterations);
 					}
 					break;
