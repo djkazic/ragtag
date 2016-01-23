@@ -1,6 +1,6 @@
 package org.alopex.ragtag.modulereflect;
 
-public class Process {
+public abstract class Process {
 
 		public static Integer process(Integer hello)
 		{
