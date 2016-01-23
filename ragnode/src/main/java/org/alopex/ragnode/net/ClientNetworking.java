@@ -59,6 +59,7 @@ public class ClientNetworking {
 			client.connect(8000, InetAddress.getByName(Config.SERVER_IP), Config.BIND_PORT);
 			return true;
 		} catch (Exception ex) {
+			Utilities.log(this, "", false);
 			Utilities.log(this, "Failure to connect to server", false);
 		}
 		return false;
