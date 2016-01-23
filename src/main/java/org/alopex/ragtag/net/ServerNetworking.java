@@ -2,6 +2,9 @@ package org.alopex.ragtag.net;
 
 import org.alopex.ragtag.Config;
 import org.alopex.ragtag.Utilities;
+import org.alopex.ragtag.net.packets.NetData;
+import org.alopex.ragtag.net.packets.NetRequest;
+import org.alopex.ragtag.net.packets.Packet;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Server;
@@ -27,7 +30,9 @@ public class ServerNetworking {
 	}
 	
 	private void registerClasses(Kryo kryo) {
-		//TODO: Register classes with kryo here
+		kryo.register(Packet.class);
+		kryo.register(NetRequest.class);
+		kryo.register(NetData.class);
 	}
 	
 	private void startServer() {
