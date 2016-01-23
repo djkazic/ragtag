@@ -25,14 +25,42 @@ public class WorkerManager {
 	}
 	
 	public static void disconnectWorker(Connection connection) {
+		Worker worker;
+		if((worker = getWorker(connection)) != null) {
+			workers.remove(worker);
+			Utilities.log("WorkerManager", "Disconnecting worker " + worker.getID(), false);
+			worker.disconnect();
+		}
+	}
+	
+	public static Worker getWorker(Connection connection) {
 		if(workers.size() > 0) {
 			for(Worker worker : workers) {
 				if(worker.getConnection().equals(connection)) {
-					workers.remove(worker);
-					Utilities.log("WorkerManager", "Disconnecting worker " + worker.getID(), false);
-					worker.disconnect();
+					return worker;
 				}
 			}
 		}
+		return null;
+	}
+	
+	public static void calculatePerformance() {
+		if(workers.size() > 0) {
+			Worker max = workers.get(0);
+			for(Worker worker : workers) {			
+				if(worker.getBenchmark() > max.getBenchmark()) {
+					max = worker;
+				}
+			}
+			for(Worker worker : workers) {
+				worker.setPerformance((double) worker.getBenchmark() / max.getBenchmark());
+			}
+		}
+	}
+	
+	public static void assignWork() {
+		calculatePerformance();
+
+
 	}
 }

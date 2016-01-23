@@ -6,7 +6,7 @@ import org.alopex.ragtag.Utilities;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Server;
 
-public class Networking {
+public class ServerNetworking {
 
 	private Server server;
 	
@@ -17,7 +17,7 @@ public class Networking {
 	
 	private void registerServerListeners() {
 		try {
-			Server server = new Server(Config.BUFFER_SIZE, Config.BUFFER_SIZE);
+			server = new Server(Config.BUFFER_SIZE, Config.BUFFER_SIZE);
 			registerClasses(server.getKryo());
 			server.addListener(new ServerListener());
 		} catch (Exception ex) {
