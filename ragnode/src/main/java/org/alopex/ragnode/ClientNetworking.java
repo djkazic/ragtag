@@ -57,4 +57,8 @@ public class ClientNetworking {
 			ex.printStackTrace();
 		}
 	}
+	
+	public Client getClient() {
+		return client;
+	}
 }

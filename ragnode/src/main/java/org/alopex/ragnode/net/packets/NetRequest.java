@@ -1,5 +1,9 @@
 package org.alopex.ragnode.net.packets;
 
+import org.alopex.ragnode.NodeCore;
+import org.alopex.ragnode.Utilities;
+
+import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 
 /**
@@ -24,5 +28,13 @@ public class NetRequest extends Packet {
 			//Some requests handled here
 		}
 		 */
+		Client client = NodeCore.getClientNetworking().getClient();
+		NetRequest tempReq = (NetRequest) oRequest;
+		switch(tempReq.getType()) {
+			case HANDSHAKE:
+				Utilities.log("RequestCore", "Received request for handshake", false);
+				client.sendTCP(new NetData(NetData.HANDSHAKE, NodeCore.getId()));
+				break;
+		}
 	}
 }
