@@ -1,5 +1,7 @@
 package org.alopex.ragtag.net;
 
+import org.alopex.ragtag.net.packets.Data;
+import org.alopex.ragtag.net.packets.Request;
 import org.alopex.ragtag.net.worker.Worker;
 import org.alopex.ragtag.net.worker.WorkerManager;
 
@@ -14,5 +16,13 @@ public class ServerListener extends Listener {
 	
 	public void disconnected(Connection connection) {
 		WorkerManager.disconnectWorker(connection);
+	}
+	
+	public void received(Connection connection, Object object) {
+		if(object instanceof Request) {
+			Request.processRequest(connection, object);
+		} else if(object instanceof Data) {
+			Data.processData(connection, object);
+		}
 	}
 }
