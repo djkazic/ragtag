@@ -12,6 +12,8 @@ import com.esotericsoftware.kryonet.Connection;
  */
 public class NetData extends Packet {
 	
+	public NetData() { }
+	
 	public NetData(byte type, Object payload) {
 		super(type, payload);
 	}

@@ -10,7 +10,9 @@ import com.esotericsoftware.kryonet.Connection;
  * @author Kevin Cai
  */
 public class NetRequest extends Packet {
-
+	
+	public NetRequest() { }
+	
 	public NetRequest(byte type, Object payload) {
 		super(type, payload);
 	}
