@@ -15,23 +15,23 @@ public class ClientNetworking {
 
 	private Client client;
 	
-	public void initialize() {
-		registerClientListeners();
-		startClient();
-		connectClient();
+	public boolean initialize() {
+		return registerClientListeners() && startClient() && connectClient();
 	}
 	
-	private void registerClientListeners() {
+	private boolean registerClientListeners() {
 		try {
 			client = new Client(Config.BUFFER_SIZE, Config.BUFFER_SIZE);
 			Utilities.log(this, "Registering client serialization IDs", false);
 			registerClasses(client.getKryo());
 			Utilities.log(this, "Attaching client listeners...", false);
 			client.addListener(new ClientListener());
+			return true;
 		} catch (Exception ex) {
 			Utilities.log(this, "Client listener registration exception: ", false);
 			ex.printStackTrace();
 		}
+		return false;
 	}
 	
 	private void registerClasses(Kryo kryo) {
@@ -40,24 +40,28 @@ public class ClientNetworking {
 		kryo.register(NetData.class);
 	}
 	
-	private void startClient() {
+	private boolean startClient() {
 		try {
 			Utilities.log(this, "Starting client thread...", false);
 			(new Thread(client)).start();
+			return true;
 		} catch (Exception ex) {
 			Utilities.log(this, "Client start exception: ", false);
 			ex.printStackTrace();
 			Utilities.log(this, "Shutting down ragnode...", false);
+			return false;
 		}
 	}
 	
-	private void connectClient() {
+	private boolean connectClient() {
 		try {
 			Utilities.log(this, "Connecting to server at " + Config.SERVER_IP, false);
 			client.connect(8000, InetAddress.getByName(Config.SERVER_IP), Config.BIND_PORT);
+			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			Utilities.log(this, "Failure to connect to server", false);
 		}
+		return false;
 	}
 	
 	public Client getClient() {
