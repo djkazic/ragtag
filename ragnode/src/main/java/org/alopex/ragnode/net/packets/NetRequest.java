@@ -1,6 +1,7 @@
 package org.alopex.ragnode.net.packets;
 
 import org.alopex.ragnode.NodeCore;
+import org.alopex.ragnode.SysRes;
 import org.alopex.ragnode.Utilities;
 
 import com.esotericsoftware.kryonet.Client;
@@ -19,6 +20,8 @@ public class NetRequest extends Packet {
 	}
 
 	public static final byte HANDSHAKE = 0x01;
+	public static final byte SYSRES    = 0x03;
+	public static final byte BENCHMARK = 0x05;
 	
 	public static void processRequest(Connection connection, Object oRequest) {
 		/**
@@ -35,6 +38,10 @@ public class NetRequest extends Packet {
 				Utilities.log("RequestCore", "Received request for handshake", false);
 				client.sendTCP(new NetData(NetData.HANDSHAKE, NodeCore.getId()));
 				break;
+				
+			case SYSRES:
+				Utilities.log("RequestCore", "Received request for system resource report", true);
+				client.sendTCP(new NetData(NetData.SYSRES, SysRes.load()));
 		}
 	}
 }

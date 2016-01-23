@@ -15,7 +15,8 @@ public class NetData extends Packet {
 	}
 
 	public static final byte HANDSHAKE = 0x02;
-	public static final byte BENCHMARK = 0x04;
+	public static final byte SYSRES    = 0x04;
+	public static final byte BENCHMARK = 0x06;
 	
 	public static void processData(Connection connection, Object oData) {
 		/**
