@@ -43,4 +43,26 @@ public class WorkerManager {
 		}
 		return null;
 	}
+	
+	public static void calculatePerformance() {
+		if(workers.size() > 0) {
+			Worker max = workers.get(0);
+			for(Worker worker : workers) {			
+				if(worker.getBenchmark() > max.getBenchmark()) {
+					max = worker;
+				}
+			}
+			for(Worker worker : workers) {
+				worker.setPerformance((double) worker.getBenchmark() / max.getBenchmark());
+			}
+		}
+	}
+	
+	public static void assignWork() {
+		calculatePerformance();
+		//Get module details
+		//Assign workers work based on their performance score (percentages of work)
+		//Work work = breakWork(worker)
+		//worker.assign(work)
+	}
 }

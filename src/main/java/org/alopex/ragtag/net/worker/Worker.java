@@ -8,6 +8,8 @@ public class Worker {
 
 	private String id;
 	private Connection connection;
+	private int benchmark;
+	private double performance;
 	
 	public Worker(Connection connection) {
 		connection.setIdleThreshold(0.4f);
@@ -38,6 +40,22 @@ public class Worker {
 		} else {
 			Utilities.log(this, "Worker disconnected (id null, conn #" + connNumber + ")", false);
 		}
+	}
+	
+	public void setID(String handshakeID) {
+		id = handshakeID;
+	}
+	
+	public int getBenchmark() {
+		return benchmark;
+	}
+	
+	public void setBenchmark(int iterations) {
+		benchmark = iterations;
+	}
+	
+	public void setPerformance(double d) {
+		performance = d;
 	}
 
 	@Override
