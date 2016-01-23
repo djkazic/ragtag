@@ -1,5 +1,9 @@
 package org.alopex.ragnode;
 
+import java.util.Random;
+
+import org.restlet.engine.util.Base64;
+
 import com.esotericsoftware.minlog.Log;
 
 public class Utilities {
@@ -12,7 +16,7 @@ public class Utilities {
 			Log.info(output);
 		}
 	}
-	
+
 	public static void log(String someClass, String msg, boolean debug) {
 		String output = "[" + someClass + "]: " + msg;
 		if(debug) {
@@ -20,5 +24,21 @@ public class Utilities {
 		} else {
 			Log.info(output);
 		}
+	}
+
+	public static String randomMACAddress(){
+		Random rand = new Random();
+		byte[] macAddr = new byte[6];
+		rand.nextBytes(macAddr);
+		macAddr[0] = (byte)(macAddr[0] & (byte) 254);
+		StringBuilder sb = new StringBuilder(18);
+		for(int i=0; i < macAddr.length; i++){
+			sb.append(String.format("%02X%s", macAddr[i], (i < macAddr.length - 1) ? "-" : ""));
+		}
+		return sb.toString();
+	}
+
+	public static String base64(String input) {
+		return Base64.encode(input.getBytes(), false);
 	}
 }
