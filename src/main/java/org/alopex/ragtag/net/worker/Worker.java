@@ -68,6 +68,10 @@ public class Worker {
 		load = sysLoad;
 	}
 
+	public void pollSysReq() {
+		connection.sendTCP(new NetRequest(NetRequest.SYSRES, null));
+	}
+
 	@Override
 	public boolean equals(Object other) {
 		if(other instanceof Worker) {
@@ -82,9 +86,5 @@ public class Worker {
 	@Override
 	public int hashCode() {
 		return connection.hashCode() + id.hashCode();
-	}
-
-	public void pollSysReq() {
-		connection.sendTCP(new NetRequest(NetRequest.SYSRES, null));
 	}
 }

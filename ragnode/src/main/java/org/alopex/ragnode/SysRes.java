@@ -1,9 +1,10 @@
 package org.alopex.ragnode;
 
 import java.lang.management.ManagementFactory;
-import com.sun.management.OperatingSystemMXBean;
 
 import javax.management.MBeanServerConnection;
+
+import com.sun.management.OperatingSystemMXBean;
 
 @SuppressWarnings("restriction")
 public class SysRes {
