@@ -1,9 +1,11 @@
 package org.alopex.ragtag.net.worker;
 
 import org.alopex.ragtag.Utilities;
+import org.alopex.ragtag.net.packets.Request;
 
 import com.esotericsoftware.kryonet.Connection;
 
+@SuppressWarnings("unused")
 public class Worker {
 
 	private String id;
@@ -17,11 +19,12 @@ public class Worker {
 	}
 	
 	public void handShake() {
-		//TODO: implement handshake protocol with ID assignment
+		connection.sendTCP(new Request(Request.HANDSHAKE, null));
 	}
 	
-	public void assignWork() {
-		//TODO: assign work via this connection
+	public void assignLoad() {
+		//TODO: method variable load
+		//Assigns a load to this worker
 	}
 	
 	public String getID() {
