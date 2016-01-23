@@ -8,12 +8,13 @@ public class ModuleTest extends TestCase {
 	
 	public static void main(String[] args) throws NoSuchMethodException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException
 	{
+
 		Class<?> clazz = new Process().getClass();
-		Integer[] nums = new Integer[10000];
+		Integer[] nums = new Integer[10];
 		for(int i = 0; i < nums.length; i++)
 			nums[i] = i;
 		Module module = new Module();
-		module.setProcess(new Process().getClass().getMethods()[0]);
+		module.setProcess(new Process());
 		module.receive(nums);
 		System.out.println(module.benchmark() / 100000.0);
 		ArrayList<Object> output = module.execute();

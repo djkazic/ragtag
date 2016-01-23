@@ -2,7 +2,7 @@ package org.alopex.ragtag.modulereflect;
 
 public class Process {
 
-		public int process(int hello)
+		public Integer process(Integer hello)
 		{
 			return hello % 3;
 		}
