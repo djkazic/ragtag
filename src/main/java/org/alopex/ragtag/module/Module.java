@@ -1,25 +1,27 @@
 package org.alopex.ragtag.module;
 
-public abstract class Module {
-	private static final int BENCHMARK_LENGTH = 6000; //In milliseconds
-	private boolean done = false;
-	public final long benchmark()
+import java.util.ArrayList;
+
+public abstract class Module<D> {
+	
+	public Data<D>[] data;
+	
+	public final long benchmark(Data<D> datum)
 	{
 		long start = System.nanoTime();
+		datum.process();
 		long end = System.nanoTime();
-		Long numOperations = (long) 0;
-		do{
-			
-		}while((end - start) < ((long) (Math.pow(10, 5) * Module.BENCHMARK_LENGTH)) && !done);
+		return end-start;
 	}
 	
 	public final void execute()
 	{
-		done = false;
-		this.job();
-		done = true;
+		ArrayList<Object> outData = new ArrayList<Object>();
+		for(Data<D> datum: data)
+		{
+			outData.add(datum.process());
+		}
 	}
-	
-	protected abstract void job();
+
 	protected abstract void define();
 }
