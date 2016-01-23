@@ -22,11 +22,11 @@ public class TestModule extends Module<Double> {
 		}
 	}
 	
-	//Handled code here
+	//TestModule main
 	public static void main(String[] args) {
 		TestModule tm = new TestModule();
 		tm.define();
 		tm.read();
-		System.out.println(tm.benchmark() + " ns");
+		tm.execute();
 	}
 }
