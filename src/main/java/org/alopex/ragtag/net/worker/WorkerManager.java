@@ -18,6 +18,7 @@ public class WorkerManager {
 	public static void registerWorker(Worker worker) {
 		if(!workers.contains(worker)) {
 			workers.add(worker);
+			Utilities.log("WorkerManager", "Executing worker handshake", false);
 			worker.handShake();
 		} else {
 			Utilities.log("WorkerManager", "Collision detected: duplicate worker " + worker.getID(), false);
@@ -28,7 +29,7 @@ public class WorkerManager {
 		Worker worker;
 		if((worker = getWorker(connection)) != null) {
 			workers.remove(worker);
-			Utilities.log("WorkerManager", "Disconnecting worker " + worker.getID(), false);
+			Utilities.log("WorkerManager", "Worker " + worker.getID() + " disconnecting...", false);
 			worker.disconnect();
 		}
 	}
@@ -60,7 +61,5 @@ public class WorkerManager {
 	
 	public static void assignWork() {
 		calculatePerformance();
-
-
 	}
 }

@@ -14,6 +14,7 @@ public class Worker {
 	private double performance;
 	
 	public Worker(Connection connection) {
+		Utilities.log(this, "New inbound connection: worker", false);
 		connection.setIdleThreshold(0.4f);
 		this.connection = connection;
 	}

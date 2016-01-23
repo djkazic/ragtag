@@ -28,7 +28,7 @@ public class NetData extends Packet {
 			switch(tempData.getType()) {
 				//Set the worker ID based on handshake
 				case HANDSHAKE:
-					Utilities.log("DataCore", "Received handshake data: ", false);
+					Utilities.log("DataCore", "Received handshake data", false);
 					Object hPayload = tempData.getPayload();
 					if(hPayload instanceof String) {
 						String handshakeID = (String) tempData.getPayload();
@@ -37,7 +37,7 @@ public class NetData extends Packet {
 					break;
 				
 				case BENCHMARK:
-					Utilities.log("DataCore", "Received benchmark data: ", false);
+					Utilities.log("DataCore", "Received benchmark data", false);
 					Object benchPayload = tempData.getPayload();
 					if(benchPayload instanceof Integer) {
 						int iterations = ((Integer) benchPayload).intValue();
