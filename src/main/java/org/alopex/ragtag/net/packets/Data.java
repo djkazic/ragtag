@@ -12,6 +12,10 @@ import com.esotericsoftware.kryonet.Connection;
  */
 public class Data extends Packet {
 	
+	public Data(byte type, Object payload) {
+		super(type, payload);
+	}
+
 	public static final byte HANDSHAKE = 0x02;
 	public static final byte BENCHMARK = 0x04;
 	
