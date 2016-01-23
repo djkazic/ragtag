@@ -6,7 +6,7 @@ import org.alopex.ragtag.Utilities;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Server;
 
-public class Networking {
+public class ServerNetworking {
 
 	private Server server;
 	
