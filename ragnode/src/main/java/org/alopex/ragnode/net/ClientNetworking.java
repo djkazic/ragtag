@@ -1,7 +1,9 @@
-package org.alopex.ragnode;
+package org.alopex.ragnode.net;
 
 import java.net.InetAddress;
 
+import org.alopex.ragnode.Config;
+import org.alopex.ragnode.Utilities;
 import org.alopex.ragnode.net.packets.NetData;
 import org.alopex.ragnode.net.packets.NetRequest;
 import org.alopex.ragnode.net.packets.Packet;

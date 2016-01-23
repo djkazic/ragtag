@@ -1,5 +1,7 @@
 package org.alopex.ragnode;
 
+import org.alopex.ragnode.net.ClientNetworking;
+
 public class NodeCore {
 	
 	private static ClientNetworking cn;
