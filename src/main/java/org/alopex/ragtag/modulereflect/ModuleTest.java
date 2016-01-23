@@ -14,7 +14,7 @@ public class ModuleTest extends TestCase {
 		for(int i = 0; i < nums.length; i++)
 			nums[i] = i;
 		Module module = new Module();
-		module.setProcess(new Process());
+		module.setProcess(new Process().getClass().getMethods()[0]);
 		module.receive(nums);
 		System.out.println(module.benchmark() / 100000.0);
 		ArrayList<Object> output = module.execute();
