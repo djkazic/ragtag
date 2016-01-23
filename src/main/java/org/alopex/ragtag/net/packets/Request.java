@@ -10,15 +10,12 @@ import com.esotericsoftware.kryonet.Connection;
  * @author Kevin Cai
  */
 public class Request extends Packet {
-
-	public static final byte HANDSHAKE = 0x01;
 	
 	public static void processRequest(Connection connection, Object oRequest) {
 		Worker worker = WorkerManager.getWorker(connection);
-		Request tempReq = (Request) oRequest;
-		switch(tempReq.getType()) {
-			case HANDSHAKE:
-				break;
+		if(worker != null) {
+			//Request tempReq = (Request) oRequest;
+			//Some requests handled here
 		}
 	}
 }
