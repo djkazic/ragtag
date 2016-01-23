@@ -15,7 +15,7 @@ public class Worker {
 	private double load;
 	
 	public Worker(Connection connection) {
-		Utilities.log(this, "New inbound connection: worker", false);
+		Utilities.log(this, "New inbound worker", false);
 		connection.setIdleThreshold(0.4f);
 		this.connection = connection;
 	}
