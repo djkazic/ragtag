@@ -23,7 +23,6 @@ public abstract class Module<T> {
 		processor.data = (T) o;
 		data.setProcess(processor);
 		dataList.add(data);
-		System.out.println("Inserted data: " + data.process());
 	}
 	
 	//Iterates through dataList until it is empty, saving all outputs
@@ -33,6 +32,8 @@ public abstract class Module<T> {
 			if(data != null) {
 				output.put(data, data.process());
 			}
+			//Debug
+			System.out.println(output);
 		}
 	}
 	
