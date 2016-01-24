@@ -22,6 +22,21 @@
 	<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
 	<link id="base-style" href="css/style.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+	<style>
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+	width: 10%;
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+</style>
 	<!-- end: CSS -->
 
 
@@ -280,11 +295,11 @@
 						</div>
 					</div>
 					<div class="span3 statbox green" onTablet="span6" onDesktop="span3">
-						<div class="boxchart" id="workers-benchmark">1,2,6,4,0,8,2,4,5,3,1,7,5</div>
+						<div class="chart" id="workers-benchmark"></div>
 						<div class="number" id="workers-number">50</div>
 						<div class="title">workers</div>
 						<div class="footer">
-							<a href="#"> read full report</a>
+							<button href="#" onclick="updateWorkerChart()"> read full report</button>
 						</div>
 					</div>
 					<div class="span3 statbox red noMargin" onTablet="span6" onDesktop="span3">
@@ -571,7 +586,7 @@
 
 	<script src="js/retina.js"></script>
 
-	<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
 	<script src="js/custom.js"></script>
 
