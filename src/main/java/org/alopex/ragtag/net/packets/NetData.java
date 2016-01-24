@@ -1,7 +1,5 @@
 package org.alopex.ragtag.net.packets;
 
-import java.util.HashMap;
-
 import org.alopex.ragtag.Utilities;
 import org.alopex.ragtag.net.worker.Worker;
 import org.alopex.ragtag.net.worker.WorkerManager;
@@ -58,9 +56,10 @@ public class NetData extends Packet {
 					break;
 					
 				case JOB:
-					Utilities.log("DataCore", "Received job data", false);
-					if(oPayload instanceof HashMap<?, ?>) {
-						HashMap<?, ?> output = (HashMap<?, ?>) oPayload;
+					Utilities.log("DataCore", "Received job data from " + worker.getID().substring(0, 5), false);
+					WorkerManager.calculateShares();
+					if(oPayload instanceof String) {
+						String output = (String) oPayload;
 						//TODO: do something with output
 						Utilities.log("DataCore", "\t" + output, false);
 					}
