@@ -6,15 +6,17 @@ var updateFreq = 5; //In seconds
 $(document).ready(
 function() {
   updateNumWorkers();
-  var dataarr = [1,2,3,5];
-  d3.select("#workers-benchmark")
-    .selectAll("div")
-      .data(dataarr)
-    .enter().append("div")
-      .style("height", function(d) { return d*10 + "px"; })
-      .style("class", function(d) { return d + "th-child"; });
+  // var dataarr = [1,2,3,5];
+  // d3.select("#workers-benchmark")
+  //   .selectAll("div")
+  //     .data(dataarr)
+  //   .enter().append("div")
+  //     .style("height", function(d) { return d*10 + "px"; })
+  //     .style("class", function(d) { return d + "th-child"; });
 });
-
+window.setInterval(function() {
+  updateNumWorkers();
+}, 5000);
 function updateWorkerChart() {
 
   console.log($('#workers-benchmark.1th-child'));
@@ -36,7 +38,7 @@ function updateNumWorkers() {
     .done( function(newNumber) {
       $('#workers-number').html(1);})
     .fail( function() {
-      $('#workers-number').html(-1);
+      $('#workers-number').html(3);
   });
 }
 
