@@ -22,6 +22,21 @@
 	<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
 	<link id="base-style" href="css/style.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+	<style>
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+	width: 10%;
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+</style>
 	<!-- end: CSS -->
 
 
@@ -273,32 +288,32 @@
 				<div class="row-fluid">
 
 					<div class="span3 statbox purple" onTablet="span6" onDesktop="span3">
-						<div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div>
-						<div class="number">123</div>
+						<div class="boxchart" id="jobs-benchmark">5,6,7,2,0,4,2,4,8,2,3,3,2</div>
+						<div class="number" id="jobs-number"></div>
 						<div class="title">jobs</div>
 						<div class="footer">
 							<a href="#"> read full report</a>
 						</div>
 					</div>
 					<div class="span3 statbox green" onTablet="span6" onDesktop="span3">
-						<div class="boxchart">1,2,6,4,0,8,2,4,5,3,1,7,5</div>
-						<div class="number">50</div>
+						<div class="chart" id="workers-benchmark"></div>
+						<div class="number" id="workers-number">50</div>
 						<div class="title">workers</div>
 						<div class="footer">
-							<a href="#"> read full report</a>
+							<button href="#" onclick="updateWorkerChart()"> read full report</button>
 						</div>
 					</div>
 					<div class="span3 statbox red noMargin" onTablet="span6" onDesktop="span3">
-						<div class="boxchart">5,6,7,2,0,-4,-2,4,8,2,3,3,2</div>
-						<div class="number">12</div>
+						<div class="boxchart" id="servers-benchmark">5,6,7,2,0,-4,-2,4,8,2,3,3,2</div>
+						<div class="number" id="servers-number">12</div>
 						<div class="title">servers</div>
 						<div class="footer">
 							<a href="#"> read full report</a>
 						</div>
 					</div>
 					<div class="span3 statbox blueDark" onTablet="span6" onDesktop="span3">
-						<div class="boxchart">7,2,2,2,1,-4,-2,4,8,,0,3,3,5</div>
-						<div class="number">231</div>
+						<div class="boxchart" id="jobsC-benchmark">7,2,2,2,1,-4,-2,4,8,,0,3,3,5</div>
+						<div class="number" id="jobsC-number">231</div>
 						<div class="title">jobs completed</div>
 						<div class="footer">
 							<a href="#"> read full report</a>
@@ -572,7 +587,12 @@
 
 	<script src="js/retina.js"></script>
 
+	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
 	<script src="js/custom.js"></script>
+
+	<script src="js/myCustomJs.js"></script>
+
 	<!-- end: JavaScript-->
 
 </body>
