@@ -13,7 +13,11 @@ import org.restlet.resource.ServerResource;
  *
  */
 public class Bridge extends ServerResource {
-
+	
+	public void setHeaders() {
+		this.getResponse().setAccessControlAllowOrigin("*");
+	}
+	
 	@Post("application/text")
 	public String process(JsonRepresentation entity) {
 		JSONObject json = null;	
@@ -47,6 +51,7 @@ public class Bridge extends ServerResource {
 			}
 		}
 		consoleOutput = responseJSON.toString();
+		setHeaders();
 		return consoleOutput;
 	}
 	

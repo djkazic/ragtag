@@ -22,7 +22,7 @@ public class APIRouter extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Creates restlet object for default non-route
 	 */
@@ -32,9 +32,9 @@ public class APIRouter extends Application {
 			return "RagTag REST API v1.0";
 		}
 	};
-	
+
 	/**
-	 * Registers /api/ restlet for bridge routing
+	 * Registers /api/ resxtlet for bridge routing
 	 */
 	public Restlet createInboundRoot() {
 		Router router = new Router(getContext());
