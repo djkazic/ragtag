@@ -1,13 +1,11 @@
 package org.alopex.ragtag.net;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.alopex.ragtag.Config;
 import org.alopex.ragtag.Utilities;
 import org.alopex.ragtag.module.Job;
-import org.alopex.ragtag.module.Process;
 import org.alopex.ragtag.net.packets.NetData;
 import org.alopex.ragtag.net.packets.NetRequest;
 import org.alopex.ragtag.net.packets.Packet;
@@ -42,10 +40,8 @@ public class ServerNetworking {
 		kryo.register(Job.class);
 		kryo.register(ArrayList.class);
 		kryo.register(HashMap.class);
-		kryo.register(Method.class);
 		kryo.register(byte[].class);
 		kryo.register(Class.class);
-		kryo.register(Process.class);
 		kryo.register(Class[].class);
 	}
 	

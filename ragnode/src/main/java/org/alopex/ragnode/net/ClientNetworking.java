@@ -1,11 +1,9 @@
 package org.alopex.ragnode.net;
 
-import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.alopex.ragnode.module.Process;
 import org.alopex.ragnode.Config;
 import org.alopex.ragnode.Utilities;
 import org.alopex.ragnode.module.Job;
@@ -31,6 +29,7 @@ public class ClientNetworking {
 			registerClasses(client.getKryo());
 			Utilities.log(this, "Attaching client listeners...", false);
 			client.addListener(new ClientListener());
+			client.addListener(new ChunkListener());
 			return true;
 		} catch (Exception ex) {
 			Utilities.log(this, "Client listener registration exception: ", false);
@@ -46,10 +45,8 @@ public class ClientNetworking {
 		kryo.register(Job.class);
 		kryo.register(ArrayList.class);
 		kryo.register(HashMap.class);
-		kryo.register(Method.class);
 		kryo.register(byte[].class);
 		kryo.register(Class.class);
-		kryo.register(Process.class);
 		kryo.register(Class[].class);
 	}
 	
