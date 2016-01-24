@@ -16,6 +16,7 @@ local.properties
 .settings/
 .loadpath
 target/
+cache-bin/
 
 # External tool builders
 .externalToolBuilders/
