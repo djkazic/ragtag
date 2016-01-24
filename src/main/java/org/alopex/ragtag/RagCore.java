@@ -52,7 +52,7 @@ public class RagCore {
 	}
 	
 	public static boolean attemptExec(String fileName, final ArrayList<String> dataSet) {
-		Utilities.log("REST-exec", "Execution for " + fileName + " detected", false);
+		Utilities.log("REST-Exec()", "Execution for " + fileName + " detected", false);
 		try {
 			final File testForExistence = new File(fileName);
 			if(testForExistence.exists() && testForExistence.length() > 0 && testForExistence.canExecute()) {
