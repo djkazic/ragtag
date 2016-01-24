@@ -76,8 +76,9 @@ public class WorkerManager {
 		}
 	}
 	
-	public static void assignWork(ArrayList<String> data) {		
+	public static void assignWork(File file, ArrayList<String> data) {		
 		ArrayList<String> container = new ArrayList<String> ();
+		Utilities.log("WorkerManager", "Starting loop for work assign: " + file, false);
 		outerLoop:
 		while((lastIndex + 1) != data.size()) {
 			for(int i=0; i < workers.size(); i++) {
@@ -86,7 +87,7 @@ public class WorkerManager {
 				
 				if(container != null) {
 					//Preliminary object
-					Job job = new Job(container, new File("evenodd.jar"));
+					Job job = new Job(container, file);
 					
 					//Check if this worker has got the job already - if so, erase the binary
 					if(worker.hasJob(job.getID())) {

@@ -1,5 +1,6 @@
 package org.alopex.ragtag;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.alopex.ragtag.module.Job;
@@ -30,15 +31,15 @@ public class RagCore {
 		(new Thread(new Runnable() {
 			public void run() {
 				try {
-					while(WorkerManager.getWorkers().size() < 3) {
+					while(WorkerManager.getWorkers().size() < 2) {
 						Thread.sleep(100);
 					}
 					
 					ArrayList<String> nums = new ArrayList<String> ();
-					for(int i = 0; i < 1000000; i++)
+					for(int i = 0; i < 100000; i++)
 						nums.add(i + "");
 					
-					WorkerManager.assignWork(nums);
+					WorkerManager.assignWork(new File("evenodd.jar"), nums);
 				} catch(Exception ex) {
 					ex.printStackTrace();
 				}
@@ -48,5 +49,25 @@ public class RagCore {
 	
 	public static ServerNetworking getServerNetworking() {
 		return sn;
+	}
+	
+	public static boolean attemptExec(String fileName, final ArrayList<String> dataSet) {
+		Utilities.log("REST-exec", "Execution for " + fileName + " detected", false);
+		try {
+			final File testForExistence = new File(fileName);
+			if(testForExistence.exists() && testForExistence.length() > 0 && testForExistence.canExecute()) {
+				(new Thread(new Runnable() {
+					public void run() {
+						WorkerManager.assignWork(testForExistence, dataSet);
+					}
+				})).start();
+				return true;
+			} else {
+				return false;
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return false;
 	}
 }
