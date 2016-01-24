@@ -1,6 +1,9 @@
 package org.alopex.ragtag.net.worker;
 
+import java.util.ArrayList;
+
 import org.alopex.ragtag.Utilities;
+import org.alopex.ragtag.module.Job;
 import org.alopex.ragtag.net.packets.NetRequest;
 
 import com.esotericsoftware.kryonet.Connection;
@@ -10,8 +13,9 @@ public class Worker implements Comparable<Worker> {
 	private String id;
 	private Connection connection;
 	private int benchmark;
-	private double share;
+	private double share = 1;
 	private double load;
+	private ArrayList<Job> jobs;
 	
 	public Worker(Connection connection) {
 		Utilities.log(this, "New inbound worker", false);
@@ -23,11 +27,6 @@ public class Worker implements Comparable<Worker> {
 		connection.sendTCP(new NetRequest(NetRequest.HANDSHAKE, null));
 	}
 	
-	public void assignLoad() {
-		//TODO: method variable load
-		//Assigns a load to this worker
-	}
-	
 	public String getID() {
 		return id;
 	}
@@ -37,13 +36,7 @@ public class Worker implements Comparable<Worker> {
 	}
 	
 	public void disconnect() {
-		int connNumber = connection.getID();
 		connection.close();
-		if(id != null) {
-			Utilities.log(this, "Worker " + id + " disconnected", false);
-		} else {
-			Utilities.log(this, "Worker disconnected (id null, conn #" + connNumber + ")", false);
-		}
 	}
 	
 	public void setID(String handshakeID) {
