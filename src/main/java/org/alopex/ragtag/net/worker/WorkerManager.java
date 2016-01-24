@@ -1,17 +1,13 @@
 package org.alopex.ragtag.net.worker;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.alopex.ragtag.RagCore;
 import org.alopex.ragtag.Utilities;
 import org.alopex.ragtag.module.Job;
 import org.alopex.ragtag.net.packets.NetRequest;
 import org.alopex.ragtag.net.poll.SysResPoller;
 
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.io.Output;
 import com.esotericsoftware.kryonet.Connection;
 
 public class WorkerManager {
@@ -107,7 +103,7 @@ public class WorkerManager {
 				}
 			}
 			try {
-				Thread.sleep(50);
+				Thread.sleep(150);
 			} catch(InterruptedException e) {}
 		}
 	}
@@ -120,7 +116,7 @@ public class WorkerManager {
 				int objSize = data.get(i).length();
 				chunkSize += objSize;
 				
-				double target = (2048 * ratio);
+				double target = (3840 * ratio);
 				output.add(data.get(i));
 				lastIndex = i;
 
