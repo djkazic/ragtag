@@ -13,21 +13,19 @@ import org.restlet.resource.ServerResource;
  *
  */
 public class Bridge extends ServerResource {
-	
-	public static String consoleOutput = "";
 
 	@Post("application/text")
 	public String process(JsonRepresentation entity) {
-		JSONObject json = null;			
+		JSONObject json = null;	
+		JSONObject responseJSON = new JSONObject();
+		String consoleOutput = "";
 		try {
 			json = entity.getJsonObject();
-
 			if(json.length() > 0) {
 				Object oMethodCall = json.get("rpc");
 				if(oMethodCall instanceof String) {
 					String methodCall = (String) oMethodCall;
 					
-					JSONObject responseJSON = new JSONObject();
 					switch(methodCall) {
 						case "num_workers":
 							responseJSON.put("num_workers", WorkerManager.getWorkers().size());
@@ -37,17 +35,19 @@ public class Bridge extends ServerResource {
 							responseJSON.put("error", "unknown_rpc_invocation");
 							break;
 					}
-					
-					consoleOutput = responseJSON.toString();
 				}
-				
-				return consoleOutput;
 			} else {
-				return "{\"error\":\"empty_params\"}";
+				responseJSON.put("error", "empty_params");
 			}
 		} catch (Exception e) {
-			return "{\"error\":\"no_rpc_defined\"}";
+			try {
+				responseJSON.put("error", "no_rpc_defined");
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
 		}
+		consoleOutput = responseJSON.toString();
+		return consoleOutput;
 	}
 	
 	@Get
