@@ -1,11 +1,8 @@
 package org.alopex.ragnode.net.packets;
 
-import java.util.HashMap;
-
 import org.alopex.ragnode.NodeCore;
-import org.alopex.ragnode.SysRes;
 import org.alopex.ragnode.Utilities;
-import org.alopex.ragnode.module.Job;
+import org.alopex.ragnode.util.SysRes;
 
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
@@ -37,7 +34,6 @@ public class NetRequest extends Packet {
 		 */
 		Client client = NodeCore.getClientNetworking().getClient();
 		NetRequest tempReq = (NetRequest) oRequest;
-		Object oPayload = tempReq.getPayload();
 		switch(tempReq.getType()) {
 			case HANDSHAKE:
 				Utilities.log("RequestCore", "Received request for handshake", false);
@@ -47,22 +43,6 @@ public class NetRequest extends Packet {
 			case SYSRES:
 				Utilities.log("RequestCore", "Received request for system resource report", true);
 				client.sendTCP(new NetData(NetData.SYSRES, SysRes.load()));
-				break;
-				
-			case JOB:
-				Utilities.log("RequestCore", "Received request for job", false);
-				if(oPayload instanceof Job) {
-					Job job = (Job) oPayload;
-					Object[] results = job.execute();
-					if(results.length == 2) {
-						if(results[0] instanceof Long && results[1] instanceof HashMap<?, ?>) {
-							long runTime = ((Long) results[0]).longValue();
-							client.sendTCP(new NetData(NetData.BENCHMARK, runTime));
-							HashMap<?, ?> output = (HashMap<?, ?>) results[1];
-							client.sendTCP(new NetData(NetData.JOB, output));
-						}
-					}
-				}
 				break;
 		}
 	}
