@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- start: Meta -->
+    <meta charset="utf-8">
+    <title>RAGTAG</title>
+    <meta name="description" content="Bootstrap Metro Dashboard">
+    <meta name="author" content="User">
+    <meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <!-- end: Meta -->
+
+    <!-- start: Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- end: Mobile Specific -->
+
+    <!-- start: CSS -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
+    <link id="bootstrap-style" href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
+    <link id="base-style" href="css/style.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+    <!-- end: CSS -->
+
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<link id="ie-style" href="css/ie.css" rel="stylesheet">
+	<![endif]-->
+
+    <!--[if IE 9]>
+		<link id="ie9style" href="css/ie9.css" rel="stylesheet">
+	<![endif]-->
+
+    <!-- start: Favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- end: Favicon -->
+
+</head>
+
+<body>
+
+    <div class="container-fluid-full landing">
+        <div class="intro">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <h1>RAGTAG</h1>
+                    <button type="button" id="scroll-down" href="#what" class="btn btn-default">More info</button>
+                </div>
+            </div>
+        </div>
+        <div class="what grey" id="what">
+            <div class="row text-center">
+                <div class="col-xs-12 col-md-12">
+                    <h2>What is it?</h2>
+                    <p>Umami health goth schlitz 90's, food truck microdosing fap pop-up ramps yuccie. Meggings freegan master cleanse, hashtag squid kickstarter hoodie ennui. Taxidermy man braid helvetica locavore. Echo park viral literally artisan taxidermy.
+                        Swag paleo synth, pork belly banjo slow-carb yr asymmetrical. Franzen pop-up lomo blog disrupt, shabby chic authentic. Chillwave tofu gluten-free master cleanse, knausgaard mlkshk cornhole.</p>
+                </div>
+            </div>
+        </div>
+        <div class="how white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <h2>How we do it</h2>
+                    </div>
+                    <div class="col-xs-12 col-md-12">
+                        <div class="col-xs-12 col-md-offset-1 col-md-5">
+                            <p>Shabby chic flexitarian whatever, hashtag pug pabst venmo marfa slow-carb blog tofu typewriter. Fixie fanny pack hammock etsy, cray meggings williamsburg knausgaard kogi 8-bit small batch tattooed microdosing flannel.</p>
+                        </div>
+                        <div class="col-xs-12 col-md-5">
+                            <p>Food truck tumblr put a bird on it tote bag flexitarian, tattooed locavore taxidermy. XOXO crucifix try-hard meh marfa. 90's meggings schlitz food truck.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="use grey">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-xs-12 col-md-12">
+                        <h2>What can I use it for?</h2>
+                        <p>Keytar photo booth YOLO, art party mlkshk austin chillwave you probably haven't heard of them ethical messenger bag. Fashion axe fanny pack direct trade taxidermy, chicharrones pour-over health goth cold-pressed roof party trust
+                            fund hella asymmetrical distillery.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="goto white">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-xs-12 col-md-12">
+                        <h2>Try it out!</h2>
+                        <a href="panel.html"><button type="button" class="btn btn-default">Go To Dashboard</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <footer>
+
+            <p>Made with <i class="fa fa-heart"></i> at HackBeanpot 2016</p>
+
+        </footer>
+    </div>
+
+
+
+    <!-- start: JavaScript-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <script>
+        $(function() {
+            $('#scroll-down').bind('click', function(event) {
+                var $anchor = $(this);
+                $('html, body').stop().animate({
+                    scrollTop: $($anchor.attr('href')).offset().top - 30
+                }, 1000, 'easeInOutQuad');
+                event.preventDefault();
+                console.log('hey');
+            });
+        });
+    </script>
+
+</body>
+
+</html>
