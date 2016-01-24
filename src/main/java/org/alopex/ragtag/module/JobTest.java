@@ -14,7 +14,7 @@ public class JobTest extends TestCase {
 			nums.add(i);
 
 		//Transparent
-		Job job = new Job(nums, Process.class);
+		//Job job = new Job(nums, Process.class);
 		
 	}
 }
