@@ -1,4 +1,4 @@
-package org.alopex.ragnode;
+package org.alopex.ragnode.util;
 
 import java.lang.management.ManagementFactory;
 
