@@ -86,7 +86,17 @@ public class WorkerManager {
 			for(int i=0; i < workers.size(); i++) {
 				Worker worker = workers.get(i);
 				container = getChunk(data, worker.getShare());
+				
+				//Preliminary object
 				Job job = new Job(container, new File("evenodd.jar"));
+				
+				//Check if this worker has got the job already - if so, erase the binary
+				if(worker.hasJob(job.getID())) {
+					job.wipeBinary();
+				} else {
+					worker.addJob(job);
+					//TODO: switch to String ArrayList
+				}
 				worker.getConnection().sendTCP(new NetRequest(NetRequest.JOB, job));
 				// Experimental: workers may not always update their scale before being hit with the next job
 			}

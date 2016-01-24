@@ -15,7 +15,7 @@ public class Worker implements Comparable<Worker> {
 	private int benchmark;
 	private double share = 1;
 	private double load;
-	private ArrayList<Job> jobs;
+	private ArrayList<Job> jobs = new ArrayList<Job> ();
 	
 	public Worker(Connection connection) {
 		Utilities.log(this, "New inbound worker", false);
@@ -90,5 +90,18 @@ public class Worker implements Comparable<Worker> {
 		} else {
 			return (int) (share - worker.getShare());
 		}
+	}
+	
+	public void addJob(Job job) {
+		jobs.add(job);
+	}
+	
+	public boolean hasJob(String jobName) {
+		for(Job job : jobs) {
+			if(job.getID().equals(jobName)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
