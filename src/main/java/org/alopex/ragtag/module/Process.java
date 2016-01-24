@@ -4,6 +4,10 @@ public abstract class Process {
 
     //Sample user defined method	
 	public static Boolean process(Integer hello) {
-		return hello % 2 == 0;
+		int out = 0;
+		for(int i=0; i < hello; i++) {
+			out += i;
+		}
+		return out % 5 == 0;
 	}
 }
