@@ -37,18 +37,10 @@ public final class HttpRequest implements Runnable {
 
 		String requestLine = br.readLine();
 
-		System.out.println();
-		System.out.println(requestLine);
-
 		StringTokenizer tokens = new StringTokenizer(requestLine);
 		tokens.nextToken();
 		String fileName = tokens.nextToken();
 		fileName = "web" + fileName;
-
-		String headerLine = null;
-		while ((headerLine = br.readLine()).length() != 0) {
-			System.out.println(headerLine);
-		}
 
 		FileInputStream fis = null;
 		boolean fileExists = true;
