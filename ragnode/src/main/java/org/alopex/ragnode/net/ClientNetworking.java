@@ -1,9 +1,14 @@
 package org.alopex.ragnode.net;
 
+import java.lang.reflect.Method;
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.alopex.ragnode.module.Process;
 import org.alopex.ragnode.Config;
 import org.alopex.ragnode.Utilities;
+import org.alopex.ragnode.module.Job;
 import org.alopex.ragnode.net.packets.NetData;
 import org.alopex.ragnode.net.packets.NetRequest;
 import org.alopex.ragnode.net.packets.Packet;
@@ -38,6 +43,14 @@ public class ClientNetworking {
 		kryo.register(Packet.class);
 		kryo.register(NetRequest.class);
 		kryo.register(NetData.class);
+		kryo.register(Job.class);
+		kryo.register(ArrayList.class);
+		kryo.register(HashMap.class);
+		kryo.register(Method.class);
+		kryo.register(byte[].class);
+		kryo.register(Class.class);
+		kryo.register(Process.class);
+		kryo.register(Class[].class);
 	}
 	
 	private boolean startClient() {
