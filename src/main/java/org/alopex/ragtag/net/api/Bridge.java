@@ -26,16 +26,19 @@ public class Bridge extends ServerResource {
 				Object oMethodCall = json.get("rpc");
 				if(oMethodCall instanceof String) {
 					String methodCall = (String) oMethodCall;
+					
+					JSONObject responseJSON = new JSONObject();
 					switch(methodCall) {
 						case "num_workers":
-							consoleOutput = WorkerManager.getWorkers().size() + "";
+							responseJSON.put("num_workers", WorkerManager.getWorkers().size());
 							break;
 							
 						default:
-							consoleOutput = "{"
-											 	+ "\"error\":\"unknown_rpc_invocation\""
-										   +"}";
+							responseJSON.put("error", "unknown_rpc_invocation");
+							break;
 					}
+					
+					consoleOutput = responseJSON.toString();
 				}
 				
 				return consoleOutput;
