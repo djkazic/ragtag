@@ -15,7 +15,6 @@ public class JobTest extends TestCase {
 
 		//Transparent
 		Job job = new Job(nums, Process.class);
-		System.out.println(job.benchmark(10));
-		System.out.println(job.execute());
+		
 	}
 }
