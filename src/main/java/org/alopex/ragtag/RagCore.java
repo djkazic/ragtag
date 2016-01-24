@@ -2,6 +2,7 @@ package org.alopex.ragtag;
 
 import java.util.ArrayList;
 
+import org.alopex.ragtag.module.Job;
 import org.alopex.ragtag.net.ServerNetworking;
 import org.alopex.ragtag.net.api.APIRouter;
 import org.alopex.ragtag.net.webserver.WebServer;
@@ -9,6 +10,8 @@ import org.alopex.ragtag.net.worker.WorkerManager;
 
 public class RagCore {
 
+	public static ArrayList<Job> jobList = new ArrayList<Job> ();;
+	
 	public static Thread webServerThread;
 	public static WorkerManager wm;
 	private static ServerNetworking sn;
@@ -27,12 +30,13 @@ public class RagCore {
 		(new Thread(new Runnable() {
 			public void run() {
 				try {
-					while(WorkerManager.getWorkers().size() == 0) {
+					while(WorkerManager.getWorkers().size() < 2) {
 						Thread.sleep(100);
 					}
-					ArrayList<Object> nums = new ArrayList<Object> ();
-					for(int i = 0; i < 1000000; i++)
-						nums.add(i);
+					
+					ArrayList<String> nums = new ArrayList<String> ();
+					for(int i = 0; i < 40000; i++)
+						nums.add(i + "");
 					
 					WorkerManager.assignWork(nums);
 				} catch(Exception ex) {
