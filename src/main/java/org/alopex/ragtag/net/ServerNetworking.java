@@ -48,7 +48,7 @@ public class ServerNetworking {
 	private void startServer() {
 		try {
 			Utilities.log(this, "Binding server port...", false);
-			server.bind(Config.BIND_PORT);
+			server.bind(Config.BIND_PORT, Config.DISC_PORT);
 			Utilities.log(this, "Starting server thread...", false);
 			server.start();
 		} catch (Exception ex) {
