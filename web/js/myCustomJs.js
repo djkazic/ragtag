@@ -6,16 +6,15 @@ var updateFreq = 5; //In seconds
 $(document).ready(
 function() {
   updateNumWorkers();
-  plott();
 });
 
 
 function updateNumWorkers() {
-  $.post('localhost:8888/api', '{ \"rpc\": \"num_workers\" }')
+  $.post('localhost:8888/api', '{ "rpc": "num_workers" }')
     .done( function(newNumber) {
-      $('#workers-number').html(newNumber.value);})
+      $('#workers-number').html(1);})
     .fail( function() {
-      $('.statbox-workers.number').html('[dev] ajax fail');
+      $('#workers-number').html(-1);
   });
 }
 
