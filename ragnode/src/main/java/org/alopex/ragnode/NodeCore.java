@@ -33,7 +33,7 @@ public class NodeCore {
 			while(networkInterfaces.hasMoreElements()){
 				NetworkInterface network = networkInterfaces.nextElement();
 				byte[] bmac = network.getHardwareAddress();
-				if(bmac != null && bmac[0] != 0) {
+				if(bmac != null && bmac.length > 0 && bmac[0] != 0) {
 					for(int i=0; i < bmac.length; i++) {
 						sb.append(String.format("%02X%s", bmac[i], (i < bmac.length - 1) ? "-" : ""));        
 					}
