@@ -26,16 +26,16 @@ public class RagCore {
 		sn = new ServerNetworking();
 		sn.initialize();
 		
-		//DEBUG
+		//DEMO - remove for production
 		(new Thread(new Runnable() {
 			public void run() {
 				try {
-					while(WorkerManager.getWorkers().size() < 2) {
+					while(WorkerManager.getWorkers().size() < 3) {
 						Thread.sleep(100);
 					}
 					
 					ArrayList<String> nums = new ArrayList<String> ();
-					for(int i = 0; i < 40000; i++)
+					for(int i = 0; i < 1000000; i++)
 						nums.add(i + "");
 					
 					WorkerManager.assignWork(nums);
