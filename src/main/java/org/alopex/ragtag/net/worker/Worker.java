@@ -5,8 +5,7 @@ import org.alopex.ragtag.net.packets.NetRequest;
 
 import com.esotericsoftware.kryonet.Connection;
 
-@SuppressWarnings("unused")
-public class Worker {
+public class Worker implements Comparable<Worker> {
 
 	private String id;
 	private Connection connection;
@@ -90,5 +89,13 @@ public class Worker {
 	@Override
 	public int hashCode() {
 		return connection.hashCode() + id.hashCode();
+	}
+
+	public int compareTo(Worker worker) {
+		if(share == 0 || worker.getShare() == 0) {
+			return (int) (worker.load - load);
+		} else {
+			return (int) (share - worker.getShare());
+		}
 	}
 }

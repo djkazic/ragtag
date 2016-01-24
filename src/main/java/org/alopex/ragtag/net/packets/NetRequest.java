@@ -20,6 +20,7 @@ public class NetRequest extends Packet {
 	public static final byte HANDSHAKE = 0x01;
 	public static final byte SYSRES    = 0x03;
 	public static final byte BENCHMARK = 0x05;
+	public static final byte JOB       = 0x07;
 	
 	public static void processRequest(Connection connection, Object oRequest) {
 		Worker worker = WorkerManager.getWorker(connection);
