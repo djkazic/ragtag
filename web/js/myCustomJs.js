@@ -19,8 +19,12 @@ $(document).ready(
             });
     });
 
-function updateWorkerChart() {
-    d3.select("#workers-benchmark").data([6]).append("div")
+window.setInterval(function() {
+  updateNumWorkers();
+}, 5000);
+
+function updateWorkerChart(n) {
+    d3.select("#workers-benchmark").data([n]).append("div")
         .style("height", function(d) {
             return d * 10 + "px";
         });
@@ -40,13 +44,14 @@ function getLargest(data) {
 }
 
 function updateNumWorkers() {
-    $.post('localhost:8888/api', '{ "rpc": "num_workers" }')
-        .done(function(newNumber) {
-            $('#workers-number').html(1);
-        })
-        .fail(function() {
-            $('#workers-number').html(-1);
-        });
+  $.post('localhost:8888/api', '{ "rpc": "num_workers" }')
+    .done( function(newNumber) {
+      $('#workers-number').html(newNumber);
+  		updateWorkerChart(newNumber); })
+    .fail( function() {
+      $('#workers-number').html(3);
+      updateWorkerChart(newNumber);
+  });
 }
 
 

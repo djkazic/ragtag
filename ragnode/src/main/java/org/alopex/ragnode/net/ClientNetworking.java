@@ -65,8 +65,15 @@ public class ClientNetworking {
 	
 	private boolean connectClient() {
 		try {
-			Utilities.log(this, "Connecting to server at " + Config.SERVER_IP, false);
-			client.connect(8000, InetAddress.getByName(Config.SERVER_IP), Config.BIND_PORT);
+			InetAddress potentialIA = client.discoverHost(Config.DISC_PORT, 4000);
+			if(potentialIA != null) {
+				Utilities.log(this, "Connecting to discovered server at " + potentialIA, false);
+				client.connect(8000, potentialIA, Config.BIND_PORT, Config.DISC_PORT);
+			} else {
+				Utilities.log(this, "Falling back to hard-coded node at " + Config.SERVER_IP, false);
+				Utilities.log(this, "Connecting to server at " + Config.SERVER_IP, false);
+				client.connect(8000, InetAddress.getByName(Config.SERVER_IP), Config.BIND_PORT, Config.DISC_PORT);		
+			}
 			return true;
 		} catch (Exception ex) {
 			Utilities.log(this, "", false);

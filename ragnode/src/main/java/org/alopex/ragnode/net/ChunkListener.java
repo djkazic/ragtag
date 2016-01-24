@@ -12,18 +12,18 @@ import com.esotericsoftware.kryonet.util.TcpIdleSender;
 
 public class ChunkListener extends TcpIdleSender {
 
-	private static ArrayList<ChunkedData> sendQueue;
+	private static ArrayList<NetData> sendQueue;
 
 	public ChunkListener() {
 		if(sendQueue == null) {
-			sendQueue = new ArrayList<ChunkedData> ();
+			sendQueue = new ArrayList<NetData> ();
 		}
 	}
 
 	@Override
 	public void idle(Connection connection) {
 		if(!sendQueue.isEmpty()) {
-			sendQueue.remove(0).send();
+			connection.sendTCP(sendQueue.remove(0));
 		}
 	}
 
@@ -41,9 +41,9 @@ public class ChunkListener extends TcpIdleSender {
 							if(results.length == 2) {
 								if(results[0] instanceof Long && results[1] instanceof String) {
 									long runTime = ((Long) results[0]).longValue();
-									sendQueue.add(new ChunkedData(connection, new NetData(NetData.BENCHMARK, runTime)));
+									sendQueue.add(new NetData(NetData.BENCHMARK, runTime));
 									String output = (String) results[1];
-									sendQueue.add(new ChunkedData(connection, new NetData(NetData.JOB, output)));
+									sendQueue.add(new NetData(NetData.JOB, output));
 								}
 							}
 						}
