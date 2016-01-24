@@ -2,7 +2,6 @@ package org.alopex.ragtag.net.worker;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.alopex.ragtag.RagCore;
 import org.alopex.ragtag.Utilities;

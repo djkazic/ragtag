@@ -1,5 +1,6 @@
 package org.alopex.ragtag.net.api;
 
+import org.alopex.ragtag.module.Job;
 import org.alopex.ragtag.net.worker.WorkerManager;
 import org.json.JSONObject;
 import org.restlet.ext.json.JsonRepresentation;
@@ -32,7 +33,11 @@ public class Bridge extends ServerResource {
 					
 					switch(methodCall) {
 						case "num_workers":
-							responseJSON.put("num_workers", WorkerManager.getWorkers().size());
+							responseJSON.put("value", WorkerManager.getWorkers().size());
+							break;
+							
+						case "num_jobs":
+							responseJSON.put("value", Job.getJobs().size());
 							break;
 							
 						default:
