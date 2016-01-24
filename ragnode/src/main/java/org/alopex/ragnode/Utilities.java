@@ -1,5 +1,8 @@
 package org.alopex.ragnode;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Formatter;
 import java.util.Random;
 
 import org.restlet.engine.util.Base64;
@@ -40,5 +43,20 @@ public class Utilities {
 
 	public static String base64(String input) {
 		return Base64.encode(input.getBytes(), false);
+	}
+	
+	public static String SHAsum(byte[] convertme) throws NoSuchAlgorithmException{
+		MessageDigest md = MessageDigest.getInstance("SHA-1"); 
+		return byteArray2Hex(md.digest(convertme));
+	}
+	
+	private static String byteArray2Hex(final byte[] hash) {
+	    Formatter formatter = new Formatter();
+	    for(byte b : hash) {
+	        formatter.format("%02x", b);
+	    }
+	    String output = formatter.toString();
+	    formatter.close();
+	    return output;
 	}
 }
