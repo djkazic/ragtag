@@ -62,7 +62,7 @@ public class Job {
 			if(!binaryCacheDir.exists()) {
 				binaryCacheDir.mkdirs();
 			}
-			File tempBinary = new File(binaryCacheDir.getAbsolutePath() + "/" + id);
+			File tempBinary = new File(binaryCacheDir.getAbsolutePath() + "/" + id + "." + ext);
 			if(ext.equals("jar")) {
 				prefix = System.getProperty("java.home") + "\\bin\\java.exe\" -jar ";
 			}

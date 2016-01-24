@@ -52,12 +52,12 @@ public class NetData extends Packet {
 					if(oPayload instanceof Integer) {
 						int iterations = ((Integer) oPayload).intValue();
 						worker.setBenchmark(iterations);
+						WorkerManager.calculateShares();
 					}
 					break;
 					
 				case JOB:
 					Utilities.log("DataCore", "Received job data from " + worker.getID().substring(0, 5), false);
-					WorkerManager.calculateShares();
 					if(oPayload instanceof String) {
 						String output = (String) oPayload;
 						//TODO: do something with output

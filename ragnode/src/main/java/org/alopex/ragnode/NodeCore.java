@@ -14,7 +14,7 @@ public class NodeCore {
         Utilities.log("RagNodeCore", "Initializing ragtag node...", false);
         generateId();
         cn = new ClientNetworking();
-		cn.initialize();	
+		cn.initialize();
     }
     
     public static ClientNetworking getClientNetworking() {

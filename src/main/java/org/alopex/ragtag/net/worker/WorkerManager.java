@@ -82,26 +82,32 @@ public class WorkerManager {
 	
 	public static void assignWork(ArrayList<String> data) {		
 		ArrayList<String> container = new ArrayList<String> ();
+		outerLoop:
 		while((lastIndex + 1) != data.size()) {
 			for(int i=0; i < workers.size(); i++) {
 				Worker worker = workers.get(i);
 				container = getChunk(data, worker.getShare());
 				
-				//Preliminary object
-				Job job = new Job(container, new File("evenodd.jar"));
-				
-				//Check if this worker has got the job already - if so, erase the binary
-				if(worker.hasJob(job.getID())) {
-					job.wipeBinary();
+				if(container != null) {
+					//Preliminary object
+					Job job = new Job(container, new File("evenodd.jar"));
+					
+					//Check if this worker has got the job already - if so, erase the binary
+					if(worker.hasJob(job.getID())) {
+						job.wipeBinary();
+					} else {
+						worker.addJob(job);
+						//TODO: switch to String ArrayList
+					}
+					worker.getConnection().sendTCP(new NetRequest(NetRequest.JOB, job));
+					// Experimental: workers may not always update their scale before being hit with the next job
 				} else {
-					worker.addJob(job);
-					//TODO: switch to String ArrayList
+					Utilities.log("WorkerManager", "Job execution halted: finished (" + lastIndex + " | " + data.size() + ")", false);
+					break outerLoop;
 				}
-				worker.getConnection().sendTCP(new NetRequest(NetRequest.JOB, job));
-				// Experimental: workers may not always update their scale before being hit with the next job
 			}
 			try {
-				Thread.sleep(150);
+				Thread.sleep(50);
 			} catch(InterruptedException e) {}
 		}
 	}
@@ -109,23 +115,25 @@ public class WorkerManager {
 	public static ArrayList<String> getChunk(ArrayList<String> data, double ratio) {
 		ArrayList<String> output = new ArrayList<String> ();
 		int chunkSize = 0;
-		Kryo kryo = RagCore.getServerNetworking().getServer().getKryo();
 		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			Output tempOut = new Output(baos);
-			for(int i=lastIndex + 1; i < data.size() && chunkSize < (4096 * ratio); i++) {
-				kryo.writeObject(tempOut, data.get(i));
-				int objSize = tempOut.toBytes().length;
-				output.add(data.get(i));
+			for(int i=lastIndex + 1; i < data.size(); i++) {
+				int objSize = data.get(i).length();
 				chunkSize += objSize;
-				tempOut.clear();
+				
+				double target = (2048 * ratio);
+				output.add(data.get(i));
 				lastIndex = i;
+
+				if(chunkSize > target) {
+					Utilities.log("WorkerManager", "Exceeded chunksize of: " + target + " | " + chunkSize, false);
+					break;
+				}
 			}
-			tempOut.close();
-			System.out.println("data [" + output.get(0) + ", " + output.get(output.size() - 1) + " ] queued.");
 			Utilities.log("WorkerManager", "Ending on number " + (lastIndex + 1) + " of " + data.size(), false);
 			if(output.size() > 0) {
 				return output;
+			} else {
+				Utilities.log("WorkerManager", "Empty output: " + output, false);
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
