@@ -22,8 +22,8 @@ public final class HttpRequest implements Runnable {
 	public void run() {
 		try {
 			processRequest();
-		} catch (Exception e) {
-			System.out.println(e);
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 

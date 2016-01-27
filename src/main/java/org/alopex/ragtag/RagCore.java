@@ -11,7 +11,7 @@ import org.alopex.ragtag.net.worker.WorkerManager;
 
 public class RagCore {
 
-	public static ArrayList<Job> jobList = new ArrayList<Job> ();;
+	public static ArrayList<Job> jobList = new ArrayList<Job> ();
 	
 	public static Thread webServerThread;
 	public static WorkerManager wm;

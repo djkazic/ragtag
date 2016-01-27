@@ -15,8 +15,8 @@ import org.restlet.resource.ServerResource;
 
 /**
  * Specific REST hook for evaluation input
- * @author Kevin Cai
  *
+ * @author Kevin Cai
  */
 public class Bridge extends ServerResource {
 
@@ -26,7 +26,7 @@ public class Bridge extends ServerResource {
 
 	@Post("application/text")
 	public String process(JsonRepresentation entity) {
-		JSONObject json = null;	
+		JSONObject json = null;
 		JSONObject responseJSON = new JSONObject();
 		String consoleOutput = "";
 		try {
@@ -42,13 +42,13 @@ public class Bridge extends ServerResource {
 								String fileName = json.getString("bin");
 								JSONArray dataSet = (JSONArray) json.get("data");
 
-								ArrayList<String> listdata = new ArrayList<String>();     
-								if(dataSet != null) { 
-									for(int i=0; i < dataSet.length(); i++){ 
+								ArrayList<String> listdata = new ArrayList<String>();
+								if(dataSet != null) {
+									for(int i = 0; i < dataSet.length(); i++) {
 										listdata.add(dataSet.get(i).toString());
-									} 
+									}
 								}
-								
+
 								boolean attempt = false;
 								if(listdata.size() > 0) {
 									attempt = RagCore.attemptExec(fileName, listdata);
@@ -88,7 +88,7 @@ public class Bridge extends ServerResource {
 		} catch (Exception e) {
 			try {
 				responseJSON.put("error", "no_rpc_defined");
-			} catch(Exception ex) {
+			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 		}

@@ -13,7 +13,6 @@ public final class WebServer implements Runnable {
 		try {
 			ServerSocket webSocket = new ServerSocket(port);
 			try {
-
 				while(true) {
 					Socket connectionSocket = webSocket.accept();
 					HttpRequest request = new HttpRequest(connectionSocket);
