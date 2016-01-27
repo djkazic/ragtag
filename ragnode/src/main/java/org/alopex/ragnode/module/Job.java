@@ -1,4 +1,5 @@
-package org.alopex.ragnode.module;
+
+import org.alopex.ragnode.core.Utilities;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,17 +8,17 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
-import org.alopex.ragnode.core.Utilities;
-
 public class Job {
 
 	private String id;
 	private String ext;
+	private boolean running;
 	private byte[] fileBytes;
 	private ArrayList<String> data;
-	private boolean running = false;
+	private boolean valid = true;
 
-	public Job() { }
+	public Job() {
+	}
 
 	public Job(ArrayList<String> data, File binary) {
 		if(data.size() > 0 && binary != null && binary.exists()) {
@@ -30,6 +31,7 @@ public class Job {
 					if(ind > 0) {
 						ext = binary.getName().substring(ind + 1);
 					} else {
+						valid = false;
 						return;
 					}
 				} else {
@@ -38,20 +40,22 @@ public class Job {
 				this.data = data;
 			} catch (Exception ex) {
 				ex.printStackTrace();
+				valid = false;
 				return;
 			}
 		} else {
 			Utilities.log(this, "Failure to create job: bad data or bad process method specified", false);
-			//TODO: Throw
+			valid = false;
 			return;
 		}
 	}
 
 	/**
 	 * Executes, using a Runtime object, the binary provided
+	 *
 	 * @return an Object[long runtime, String json_output]
 	 */
-	public final Object[] execute() {		
+	public final Object[] execute() {
 		try {
 			String prefix = "";
 			File binaryCacheDir = new File("cache-bin");
@@ -77,7 +81,7 @@ public class Job {
 			}
 			Utilities.log(this, "Assembling input string...", false);
 			StringBuilder sb = new StringBuilder();
-			for(int i=0; i < data.size(); i++) {
+			for(int i = 0; i < data.size(); i++) {
 				sb.append(data.get(i) + " ");
 			}
 			String input = sb.toString().replaceAll("^\\s+|\\s+$", "");
@@ -95,7 +99,7 @@ public class Job {
 			reader.close();
 			ps.waitFor();
 			long end = System.nanoTime();
-			return new Object[] {end - start, output.toString()};
+			return new Object[]{end - start, output.toString()};
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -110,11 +114,19 @@ public class Job {
 		return running;
 	}
 
+	public boolean isValid() {
+		return valid;
+	}
+
 	public boolean equals(Job other) {
 		return id.equals(other);
 	}
-	
+
 	public String getID() {
 		return id;
+	}
+
+	public void wipeBinary() {
+		fileBytes = null;
 	}
 }

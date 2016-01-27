@@ -17,6 +17,7 @@ public class Job {
 	private boolean running;
 	private byte[] fileBytes;
 	private ArrayList<String> data;
+	private boolean valid = true;
 
 	public Job() { }
 
@@ -31,6 +32,7 @@ public class Job {
 					if(ind > 0) {
 						ext = binary.getName().substring(ind + 1);
 					} else {
+						valid = false;
 						return;
 					}
 				} else {
@@ -42,11 +44,12 @@ public class Job {
 				}
 			} catch (Exception ex) {
 				ex.printStackTrace();
+				valid = false;
 				return;
 			}
 		} else {
 			Utilities.log(this, "Failure to create job: bad data or bad process method specified", false);
-			//TODO: Throw
+			valid = false;
 			return;
 		}
 	}
@@ -113,6 +116,8 @@ public class Job {
 	public boolean isRunning() {
 		return running;
 	}
+
+	public boolean isValid() { return valid; }
 
 	public static ArrayList<Job> getJobs() {
 		return RagCore.jobList;

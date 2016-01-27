@@ -84,19 +84,24 @@ public class WorkerManager {
 			for(int i=0; i < workers.size(); i++) {
 				Worker worker = workers.get(i);
 				container = getChunk(data, worker.getShare());
-				
+
 				if(container != null) {
-					//Preliminary object
+					//Preliminary object with file-read bytes
 					Job job = new Job(container, file);
-					
-					//Check if this worker has got the job already - if so, erase the binary
-					if(worker.hasJob(job.getID())) {
-						job.wipeBinary();
+
+					if(job.isValid()) {
+						//Check if this worker has got the job already - if so, erase the binary bytes
+						if(worker.hasJob(job.getID())) {
+							job.wipeBinary();
+						} else {
+							//Queue the job in worker storage
+							worker.addJob(job);
+						}
+						worker.getConnection().sendTCP(new NetRequest(NetRequest.JOB, job));
 					} else {
-						worker.addJob(job);
-						//TODO: switch to String ArrayList
+						Utilities.log("WorkerManager", "Job canceled: invalid", false);
+						break outerLoop;
 					}
-					worker.getConnection().sendTCP(new NetRequest(NetRequest.JOB, job));
 					// Experimental: workers may not always update their scale before being hit with the next job
 				} else {
 					Utilities.log("WorkerManager", "Job execution halted: finished (" + lastIndex + " | " + data.size() + ")", false);
@@ -107,6 +112,7 @@ public class WorkerManager {
 				Thread.sleep(150);
 			} catch(InterruptedException e) {}
 		}
+		Utilities.log("WorkerManager", "Job execution halted: assignment loop terminated", false);
 	}
 	
 	public static ArrayList<String> getChunk(ArrayList<String> data, double ratio) {

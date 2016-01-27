@@ -38,12 +38,14 @@ public class ChunkListener extends TcpIdleSender {
 						public void run() {
 							Job job = (Job) oPayload;
 							Object[] results = job.execute();
-							if(results.length == 2) {
-								if(results[0] instanceof Long && results[1] instanceof String) {
-									long runTime = ((Long) results[0]).longValue();
-									sendQueue.add(new NetData(NetData.BENCHMARK, runTime));
-									String output = (String) results[1];
-									sendQueue.add(new NetData(NetData.JOB, output));
+							if(results != null) {
+								if(results.length == 2) {
+									if(results[0] instanceof Long && results[1] instanceof String) {
+										long runTime = ((Long) results[0]).longValue();
+										sendQueue.add(new NetData(NetData.BENCHMARK, runTime));
+										String output = (String) results[1];
+										sendQueue.add(new NetData(NetData.JOB, output));
+									}
 								}
 							}
 						}

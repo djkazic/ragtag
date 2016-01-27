@@ -97,9 +97,12 @@ public class Worker implements Comparable<Worker> {
 	}
 	
 	public boolean hasJob(String jobName) {
-		for(Job job : jobs) {
-			if(job.getID().equals(jobName)) {
-				return true;
+		if(jobs.size() > 0) {
+			for(int i = 0; i < jobs.size(); i++) {
+				Job job = jobs.get(i);
+				if(job != null && job.getID() != null) {
+					return (job.getID().equals(jobName));
+				}
 			}
 		}
 		return false;
