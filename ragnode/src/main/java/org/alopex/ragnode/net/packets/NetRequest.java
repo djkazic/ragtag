@@ -1,7 +1,7 @@
 package org.alopex.ragnode.net.packets;
 
-import org.alopex.ragnode.NodeCore;
-import org.alopex.ragnode.Utilities;
+import org.alopex.ragnode.core.NodeCore;
+import org.alopex.ragnode.core.Utilities;
 import org.alopex.ragnode.util.SysRes;
 
 import com.esotericsoftware.kryonet.Client;

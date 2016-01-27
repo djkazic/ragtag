@@ -1,6 +1,6 @@
 package org.alopex.ragtag.net.packets;
 
-import org.alopex.ragtag.Utilities;
+import org.alopex.ragtag.core.Utilities;
 import org.alopex.ragtag.net.worker.Worker;
 import org.alopex.ragtag.net.worker.WorkerManager;
 

@@ -1,4 +1,4 @@
-package org.alopex.ragtag;
+package org.alopex.ragtag.core;
 
 public class Config {
 

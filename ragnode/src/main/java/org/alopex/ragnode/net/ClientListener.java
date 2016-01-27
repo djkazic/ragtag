@@ -1,7 +1,7 @@
 package org.alopex.ragnode.net;
 
-import org.alopex.ragnode.NodeCore;
-import org.alopex.ragnode.Utilities;
+import org.alopex.ragnode.core.NodeCore;
+import org.alopex.ragnode.core.Utilities;
 import org.alopex.ragnode.net.packets.NetData;
 import org.alopex.ragnode.net.packets.NetRequest;
 

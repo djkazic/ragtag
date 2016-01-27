@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
-import org.alopex.ragtag.RagCore;
-import org.alopex.ragtag.Utilities;
+import org.alopex.ragtag.core.RagCore;
+import org.alopex.ragtag.core.Utilities;
 
 public class Job {
 

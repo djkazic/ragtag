@@ -3,7 +3,7 @@ package org.alopex.ragtag.net.webserver;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import org.alopex.ragtag.Utilities;
+import org.alopex.ragtag.core.Utilities;
 
 public final class WebServer implements Runnable {
 

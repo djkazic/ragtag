@@ -4,8 +4,8 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.alopex.ragnode.Config;
-import org.alopex.ragnode.Utilities;
+import org.alopex.ragnode.core.Config;
+import org.alopex.ragnode.core.Utilities;
 import org.alopex.ragnode.module.Job;
 import org.alopex.ragnode.net.packets.NetData;
 import org.alopex.ragnode.net.packets.NetRequest;

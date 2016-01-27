@@ -1,4 +1,4 @@
-package org.alopex.ragnode;
+package org.alopex.ragnode.core;
 
 import java.net.NetworkInterface;
 import java.util.Enumeration;

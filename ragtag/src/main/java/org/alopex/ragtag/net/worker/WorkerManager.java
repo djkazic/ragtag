@@ -3,7 +3,7 @@ package org.alopex.ragtag.net.worker;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.alopex.ragtag.Utilities;
+import org.alopex.ragtag.core.Utilities;
 import org.alopex.ragtag.module.Job;
 import org.alopex.ragtag.net.packets.NetRequest;
 import org.alopex.ragtag.net.poll.SysResPoller;

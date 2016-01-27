@@ -3,8 +3,8 @@ package org.alopex.ragtag.net;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.alopex.ragtag.Config;
-import org.alopex.ragtag.Utilities;
+import org.alopex.ragtag.core.Config;
+import org.alopex.ragtag.core.Utilities;
 import org.alopex.ragtag.module.Job;
 import org.alopex.ragtag.net.packets.NetData;
 import org.alopex.ragtag.net.packets.NetRequest;

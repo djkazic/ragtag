@@ -2,8 +2,8 @@ package org.alopex.ragtag.net.api;
 
 import java.util.ArrayList;
 
-import org.alopex.ragtag.RagCore;
-import org.alopex.ragtag.SysRes;
+import org.alopex.ragtag.core.RagCore;
+import org.alopex.ragtag.core.SysRes;
 import org.alopex.ragtag.module.Job;
 import org.alopex.ragtag.net.worker.WorkerManager;
 import org.json.JSONArray;

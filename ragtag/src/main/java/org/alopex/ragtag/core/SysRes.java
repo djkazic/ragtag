@@ -1,4 +1,4 @@
-package org.alopex.ragtag;
+package org.alopex.ragtag.core;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;

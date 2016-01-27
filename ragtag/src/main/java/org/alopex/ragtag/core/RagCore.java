@@ -1,4 +1,4 @@
-package org.alopex.ragtag;
+package org.alopex.ragtag.core;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class RagCore {
 		(new Thread(new Runnable() {
 			public void run() {
 				try {
-					while(WorkerManager.getWorkers().size() < 2) {
+					while(WorkerManager.getWorkers().size() < 1) {
 						Thread.sleep(100);
 					}
 					

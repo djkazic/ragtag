@@ -2,7 +2,7 @@ package org.alopex.ragtag.net.worker;
 
 import java.util.ArrayList;
 
-import org.alopex.ragtag.Utilities;
+import org.alopex.ragtag.core.Utilities;
 import org.alopex.ragtag.module.Job;
 import org.alopex.ragtag.net.packets.NetRequest;
 

@@ -1,4 +1,4 @@
-package org.alopex.ragtag;
+package org.alopex.ragtag.core;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

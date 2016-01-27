@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
-import org.alopex.ragnode.Utilities;
+import org.alopex.ragnode.core.Utilities;
 
 public class Job {
 
