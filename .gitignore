@@ -17,6 +17,7 @@ local.properties
 .loadpath
 target/
 cache-bin/
+.idea/
 
 # External tool builders
 .externalToolBuilders/
