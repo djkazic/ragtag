@@ -13,9 +13,9 @@ public class Job {
 
 	private String id;
 	private String ext;
-	private boolean running;
 	private byte[] fileBytes;
 	private ArrayList<String> data;
+	private boolean running = false;
 
 	public Job() { }
 

@@ -77,7 +77,7 @@ public class WorkerManager {
 	}
 	
 	public static void assignWork(File file, ArrayList<String> data) {		
-		ArrayList<String> container = new ArrayList<String> ();
+		ArrayList<String> container;
 		Utilities.log("WorkerManager", "Starting loop for work assign: " + file, false);
 		outerLoop:
 		while((lastIndex + 1) != data.size()) {
