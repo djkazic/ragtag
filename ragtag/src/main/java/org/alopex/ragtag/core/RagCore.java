@@ -11,7 +11,7 @@ import org.alopex.ragtag.net.worker.WorkerManager;
 
 public class RagCore {
 
-	public static ArrayList<Job> jobList = new ArrayList<Job> ();
+	public static ArrayList<Job> jobList = new ArrayList<>();
 	
 	public static Thread webServerThread;
 	public static WorkerManager wm;
@@ -35,7 +35,7 @@ public class RagCore {
 						Thread.sleep(100);
 					}
 					
-					ArrayList<String> nums = new ArrayList<String> ();
+					ArrayList<String> nums = new ArrayList<> ();
 					for(int i = 0; i < 100000; i++)
 						nums.add(i + "");
 					
@@ -56,11 +56,11 @@ public class RagCore {
 		try {
 			final File testForExistence = new File(fileName);
 			if(testForExistence.exists() && testForExistence.length() > 0 && testForExistence.canExecute()) {
-				(new Thread(new Runnable() {
+				new Thread(new Runnable() {
 					public void run() {
 						WorkerManager.assignWork(testForExistence, dataSet);
 					}
-				})).start();
+				}).start();
 				return true;
 			} else {
 				return false;
