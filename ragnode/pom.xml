@@ -5,9 +5,7 @@
 	<groupId>org.alopex</groupId>
 	<artifactId>ragnode</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-    <groupId>org.alopex</groupId>
-    <artifactId>ragtag</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+
     <build>
         <plugins>
             <plugin>

@@ -21,6 +21,5 @@ public class SysRes {
 		}
 		return -1;
 	}
-	
-	//TODO: processor count detection as to report -> front-end
+
 }
