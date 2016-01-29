@@ -1,3 +1,4 @@
+package org.alopex.ragnode.module;
 
 import org.alopex.ragnode.core.Utilities;
 
@@ -17,8 +18,7 @@ public class Job {
 	private ArrayList<String> data;
 	private boolean valid = true;
 
-	public Job() {
-	}
+	public Job() { }
 
 	public Job(ArrayList<String> data, File binary) {
 		if(data.size() > 0 && binary != null && binary.exists()) {
@@ -32,21 +32,16 @@ public class Job {
 						ext = binary.getName().substring(ind + 1);
 					} else {
 						valid = false;
-						return;
 					}
-				} else {
-					return;
 				}
 				this.data = data;
 			} catch (Exception ex) {
 				ex.printStackTrace();
 				valid = false;
-				return;
 			}
 		} else {
 			Utilities.log(this, "Failure to create job: bad data or bad process method specified", false);
 			valid = false;
-			return;
 		}
 	}
 

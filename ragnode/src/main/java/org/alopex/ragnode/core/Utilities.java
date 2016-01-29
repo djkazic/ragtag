@@ -11,7 +11,7 @@ import com.esotericsoftware.minlog.Log;
 
 public class Utilities {
 
-	public static void log(Object someClass, String msg, boolean debug) {
+	public static boolean log(Object someClass, String msg, boolean debug) {
 		if(Config.CONSOLE) {
 			String output = "[" + someClass.getClass().getName() + "]: " + msg;
 			if(debug) {
@@ -19,10 +19,13 @@ public class Utilities {
 			} else {
 				Log.info(output);
 			}
+		} else {
+			return false;
 		}
+		return true;
 	}
 
-	public static void log(String someClass, String msg, boolean debug) {
+	public static boolean log(String someClass, String msg, boolean debug) {
 		if(Config.CONSOLE) {
 			String output = "[" + someClass + "]: " + msg;
 			if(debug) {
@@ -30,7 +33,10 @@ public class Utilities {
 			} else {
 				Log.info(output);
 			}
+		} else {
+			return false;
 		}
+		return true;
 	}
 
 	public static String randomMACAddress(){
