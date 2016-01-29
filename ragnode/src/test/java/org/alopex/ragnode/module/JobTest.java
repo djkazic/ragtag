@@ -22,7 +22,7 @@ public class JobTest {
 	private static Job testJob;
 
 	@BeforeClass
-	public static void testSetup() {
+	public static void setUp() {
 		try {
 			testData = new ArrayList<String> ();
 			testData.add("a");

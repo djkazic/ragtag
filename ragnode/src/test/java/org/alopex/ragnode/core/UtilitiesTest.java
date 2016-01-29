@@ -13,7 +13,7 @@ public class UtilitiesTest {
 	private static String testInput;
 
 	@BeforeClass
-	public static void testSetup() {
+	public static void setUp() {
 		testInput = "abc123";
 	}
 

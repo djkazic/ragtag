@@ -14,7 +14,7 @@ public class ChunkedData {
 		this.sendData = sendData;
 	}
 	
-	public void send() {
-		connection.sendTCP(sendData);
+	public int send() {
+		return connection.sendTCP(sendData);
 	}
 }
